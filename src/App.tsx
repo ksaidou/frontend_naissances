@@ -3,7 +3,9 @@ function App() {
 
   return (
     <main>
-      Gestion de naissances
+        <h1 className="text-3xl font-bold underline">
+          Gestion de naissances
+        </h1>
     </main>
   )
 }
