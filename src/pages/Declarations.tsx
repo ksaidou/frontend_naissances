@@ -14,7 +14,7 @@ function Declarations() {
             <span className="col-span-2 pl-1"> Parent 2 </span>
             <span>Status</span>
             <span className="col-span-2 pl-6">ACTION</span>
-          </article>
+        </article>
       {
         DECLARATIONS.map((item,index)=>
         (

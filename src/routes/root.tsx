@@ -3,6 +3,7 @@ import App from "../App";
 import ErrorPage from "../error-page";
 import PrivateLayout from "../layouts/PrivateLayout";
 import Declarations from "../pages/Declarations";
+import Demandes from "../pages/Demandes";
 import Home from "../pages/Home";
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             path: "declarations",
             element: <Declarations />,
         },
+        {
+          path:"demandes",
+          element:<Demandes />,
+        }
         ],
       },
     ],
