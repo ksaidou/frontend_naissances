@@ -52,3 +52,15 @@ export default tseslint.config({
   },
 })
 ```
+echo "# frontend_naissances" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/ksaidou/frontend_naissances.git
+git push -u origin main
+
+
+git remote add origin https://github.com/ksaidou/frontend_naissances.git
+git branch -M main
+git push -u origin main
