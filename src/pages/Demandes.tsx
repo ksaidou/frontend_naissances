@@ -1,5 +1,5 @@
-import { DEMANDES } from "../utils/demandes";
-import { formatDate } from "../utils";
+import { DEMANDES } from "@/utils/demandes";
+import { formatDate } from "@/utils";
 import { getStatusColors, getStatusLabel } from "../utils";
 
 function Demandes() {

@@ -1,8 +1,9 @@
-import { DECLARATIONS } from "../utils/declarations";
-import { formatDate } from "../utils/date";
-import { getStatusColors, getStatusLabel } from "../utils/actions";
+import { formatDate } from "@/utils/date";
+import { getStatusColors, getStatusLabel } from "@/utils/actions";
+import { useDeclarations } from "@/hooks";
 
 function Declarations() {
+ const {declarations} = useDeclarations();
   return (
     <div className="bg-white shadow-md rounded-md">
       <article className="grid grid-cols-12 items-center">
@@ -16,7 +17,7 @@ function Declarations() {
             <span className="col-span-2 pl-6">ACTION</span>
         </article>
       {
-        DECLARATIONS.map((item,index)=>
+        declarations.map((item,index)=>
         (
           <article 
           key={item.id} 
@@ -27,7 +28,7 @@ function Declarations() {
               <span>{item.child.firstname}</span>
               <span className="uppercase">{item.child.lastname}</span>
             </span>
-            <span>{formatDate(item.child.birthdate)}</span>
+            <span>{item?.child?.birthdate ? formatDate(item.child.birthdate) : null}</span>
             <span>
               <span className="p-2">{item.compagny.name}</span>
             </span>
