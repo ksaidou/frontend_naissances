@@ -1,7 +1,11 @@
 import { Declaration } from '@/types/Declaration';
 import DeclarationItem from './DeclarationItem';
 
-function DeclarationsItems(props: any) {
+type Props ={
+  declarations: Declaration[]
+};
+
+function DeclarationsItems(props: Props) {
    const {declarations} = props;
   return (
     <>
@@ -18,7 +22,7 @@ function DeclarationsItems(props: any) {
       {
         declarations.map((item:Declaration, index:number)=>
         (
-          <DeclarationItem declaration={item} index={index}/>
+          <DeclarationItem declaration={item} index={index} key={item.id} />
         ))}
     </>
   );
