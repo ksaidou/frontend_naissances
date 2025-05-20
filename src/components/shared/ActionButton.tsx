@@ -6,7 +6,8 @@ type Props ={
 }
 function ActionButton({ classes, label, action}: Props) {
   return (
-    <button type='button' className={`${classes}`} onClick={action}>
+    <button type='button' className={`${classes}`} 
+    onClick={action}>
         {label}
     </button>
   );
