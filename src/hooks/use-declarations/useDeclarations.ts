@@ -11,11 +11,7 @@ function useDeclarations (){
     const {status:itemOneStatus} = itemOne;
     const {status:itemTwoStatus} = itemTwo;
     let result = 0;
-    /*if(statusOrder === 1){
-      setStatusOrder(-1);
-    }else{
-      setStatusOrder(1);
-    }*/
+
     if(itemOneStatus === itemTwoStatus){
       result = 0;
     }else if (itemOneStatus > itemTwoStatus){
