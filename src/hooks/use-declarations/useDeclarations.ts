@@ -1,10 +1,35 @@
 import { search } from "@/services";
 import { Declaration } from "@/types/Declaration";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function useDeclarations (){
+  const filterRef = useRef<any>("");
   const[statusOrder, setStatusOrder] = useState(1);
   const [declarations,setDeclaration]= useState<Declaration[]>([]);
+  const [filteredDeclarations,setFilteredDeclaration]= useState<Declaration[]>([]);
+
+  const filterDeclarations = ()=>{
+    const filter = filterRef.current.value || "";
+   
+    if((<String>filter).length >= 3)
+    {
+      //console.log(filter.lenght);
+      const filteredDeclarations = declarations.filter((item)=>{
+        const {child:{firstname, lastname}} = item;
+        return (
+          firstname.toLowerCase().indexOf(filter.toLowerCase()) > -1||
+          lastname.toLowerCase().includes(filter.toLowerCase())
+        );
+
+      });
+      setFilteredDeclaration([...filteredDeclarations]);
+
+    }
+    else{
+      setFilteredDeclaration([...declarations]);
+    }
+  };
+
 
   const sortByStatus = ()=>{
     const sortedDeclarations = declarations.sort((itemOne:Declaration, itemTwo:Declaration)=>{
@@ -35,6 +60,6 @@ function useDeclarations (){
     getDeclarations();
   },[]);
 
-  return {declarations,sortByStatus};
+  return {declarations,sortByStatus,filterRef,filterDeclarations,filteredDeclarations};
 }
 export{useDeclarations};
