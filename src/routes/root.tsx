@@ -5,6 +5,7 @@ import PrivateLayout from "@/layouts/PrivateLayout";
 import Declarations from "@/pages/Declarations";
 import Demandes from "@/pages/Demandes";
 import Home from "@/pages/Home";
+import DeclarationEdit from "@/pages/DeclarationEdit";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             path: "declarations",
             element: <Declarations />,
         },
+        {
+          path: "declarations/new",
+          element: <DeclarationEdit />,
+      },
         {
           path:"demandes",
           element:<Demandes />,
