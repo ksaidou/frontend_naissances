@@ -20,7 +20,7 @@ function Declarations() {
         ref={filterRef}
         onKeyUp={filterDeclarations}
         />
-        <Link to={"private/declarations/new"} className="bg-green-600 text-white px-2 py-2 mx-2 rounded-md"> nouvelle demande </Link>
+        <Link to={"/private/declarations/new"} className="bg-green-600 text-white px-2 py-2 mx-2 rounded-md"> nouvelle demande </Link>
     </div>
       <div className="bg-white shadow-md rounded-md">
         <DeclarationsItems declarations ={filteredDeclarations.length ? filteredDeclarations : declarations}
