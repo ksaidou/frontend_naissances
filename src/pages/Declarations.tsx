@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function Declarations() {
  const {declarations,
   sortByStatus,
+  updateStatus,
   filterRef,
   filterDeclarations,
   filteredDeclarations
@@ -24,7 +25,7 @@ function Declarations() {
     </div>
       <div className="bg-white shadow-md rounded-md">
         <DeclarationsItems declarations ={filteredDeclarations.length ? filteredDeclarations : declarations}
-        sortByStatus ={sortByStatus}/>     
+        sortByStatus ={sortByStatus} updateStatus={updateStatus}/>     
       </div>
     </>
   )

@@ -3,12 +3,13 @@ import DeclarationItem from './DeclarationItem';
 import { BiSort } from "react-icons/bi";
 
 type Props ={
-  declarations: Declaration[],
+  declarations: Declaration[];
+  updateStatus : (data:any)=>void;
   sortByStatus :()=>void;
 };
 
 function DeclarationsItems(props: Props) {
-   const {declarations, sortByStatus} = props;
+   const {declarations, sortByStatus, updateStatus} = props;
   return (
     <>
          <article className="grid grid-cols-12 items-center">
@@ -27,7 +28,7 @@ function DeclarationsItems(props: Props) {
       {
         declarations.map((item:Declaration, index:number)=>
         (
-          <DeclarationItem declaration={item} index={index} key={item.id} />
+          <DeclarationItem declaration={item} index={index} key={item.id} action={updateStatus}/>
         ))}
     </>
   );

@@ -5,10 +5,11 @@ import { Declaration } from '@/types/Declaration'
 
 type Props ={
   declaration: Declaration,
-  index : number
+  index : number,
+  action : (data:{id:string, status:string}) => void;
 };
 
-function DeclarationItem({declaration:item, index}: Props) {
+function DeclarationItem({declaration:item, index, action}: Props) {
   return (
     <>
     <article 
@@ -32,7 +33,7 @@ function DeclarationItem({declaration:item, index}: Props) {
               <span className="uppercase">{item.secondParent.lastname}</span>
             </span>
             <StatusBadge status={item.status}/>
-            <ActionButton classes="col-span-2 pl-6" label="Action" action={()=> null}/>
+            <ActionButton classes="col-span-2 mx-3" label="Action" action={action} id={`${item.id}`}/>
         </article>
     </>
   )

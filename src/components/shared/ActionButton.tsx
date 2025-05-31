@@ -1,15 +1,24 @@
+import { getStatusLabel, STATUS } from "@/utils";
 
 type Props ={
-    classes : string,
-    label : string,
-    action : ()=> null;
+    id: string;
+    classes : string;
+    label : string;
+    action : (data:{id:string, status:string}) => void;
 }
-function ActionButton({ classes, label, action}: Props) {
+function ActionButton({id, classes, action}: Props) {
   return (
-    <button type='button' className={`${classes}`} 
-    onClick={action}>
-        {label}
-    </button>
+    <div className={classes}>
+    <select  onChange={(event:any) =>{ 
+      const status = event.target.value;
+      action({id:id,status});
+      }}>
+      <option value="">Selectionner</option>
+      {STATUS.map((item:string) =>(
+        <option value={item} key={`${id}-${item}`}>{getStatusLabel(item)}</option>
+      ))};
+    </select>
+    </div>    
   );
 }
 

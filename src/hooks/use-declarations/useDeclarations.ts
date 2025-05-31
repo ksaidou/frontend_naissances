@@ -8,6 +8,14 @@ function useDeclarations (){
   const [declarations,setDeclaration]= useState<Declaration[]>([]);
   const [filteredDeclarations,setFilteredDeclaration]= useState<Declaration[]>([]);
 
+  const updateStatus = (data:{id:string, status:string})=>{
+    const declarationToUpdate = declarations.filter(({id}:Declaration) => id === data.id)[0];
+    const declarationUpdated = {...declarationToUpdate,status:data.status};
+    const declarationsToKeep = declarations.filter(({id}:Declaration) => id !== data.id);
+    setDeclaration([...declarationsToKeep,declarationUpdated]);
+    /*console.log(declarationToUpdate);*/
+  };
+
   const filterDeclarations = ()=>{
     const filter = filterRef.current.value || "";
    
@@ -60,6 +68,6 @@ function useDeclarations (){
     getDeclarations();
   },[]);
 
-  return {declarations,sortByStatus,filterRef,filterDeclarations,filteredDeclarations};
+  return {declarations,sortByStatus,filterRef,filterDeclarations,filteredDeclarations,updateStatus};
 }
 export{useDeclarations};
