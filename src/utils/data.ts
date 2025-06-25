@@ -16,4 +16,15 @@ const NAV_LINKS =[
         label:'Les courriers'
     }
 ];
-export {NAV_LINKS};
+
+const UPDATE_DECLARATIONS ="UPDATE_DECLARATIONS";
+const UPDATE_DECLARATION_STATUS ="UPDATE_DECLARATION_STATUS";
+const INITIAL_STATE = { declarations:[] };
+
+
+export {
+    NAV_LINKS,
+    INITIAL_STATE,
+    UPDATE_DECLARATIONS,
+    UPDATE_DECLARATION_STATUS
+        };

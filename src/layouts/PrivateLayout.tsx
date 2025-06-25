@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom"
 import Nav from "../components/nav/Nav"
 
-
 function PrivateLayout() {
   return (
     <section className=" min-h-screen">

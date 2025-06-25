@@ -8,8 +8,10 @@ function Declarations() {
   state,
   sortByStatus,
   updateStatus,
-  filterRef,
   filterDeclarations,
+  filterRef,
+  filteredDeclarations,
+  declarations,
   }   = useDeclarations();
   console.log(state);
   return (
@@ -25,7 +27,7 @@ function Declarations() {
         <Link to={"/private/declarations/new"} className="bg-green-600 text-white px-2 py-2 mx-2 rounded-md"> nouvelle demande </Link>
     </div>
       <div className="bg-white shadow-md rounded-md">
-        <DeclarationsItems declarations ={state?.declarations}
+        <DeclarationsItems declarations ={filteredDeclarations && filteredDeclarations.length ? filteredDeclarations : declarations}
         sortByStatus ={sortByStatus} updateStatus={updateStatus}/>     
       </div>
     </>

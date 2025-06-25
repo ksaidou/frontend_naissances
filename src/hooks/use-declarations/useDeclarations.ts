@@ -4,19 +4,21 @@ import { Declaration } from "@/types/Declaration";
 import { useContext, useEffect, useRef, useState } from "react";
 
 function useDeclarations (){
-  const {state,updateDeclarations} = useContext(ApplicationContext);
+  const {state,updateDeclarations,updateDeclarationStatus} = useContext(ApplicationContext);
   const filterRef = useRef<any>("");
   const[statusOrder, setStatusOrder] = useState(1);
   const [declarations,setDeclaration]= useState<Declaration[]>([]);
   const [filteredDeclarations,setFilteredDeclaration]= useState<Declaration[]>([]);
 
-  const updateStatus = (data:{id:string, status:string})=>{
+  const updateStatusWithoutContext = (data:{id:string, status:string})=>{
     const declarationToUpdate = declarations.filter(({id}:Declaration) => id === data.id)[0];
     const declarationUpdated = {...declarationToUpdate,status:data.status};
     const declarationsToKeep = declarations.filter(({id}:Declaration) => id !== data.id);
     setDeclaration([...declarationsToKeep,declarationUpdated]);
     /*console.log(declarationToUpdate);*/
   };
+
+  const updateStatus = (data:{id:string, status:string})=> updateDeclarationStatus(data);
 
   const filterDeclarations = ()=>{
     const filter = filterRef.current.value || "";
