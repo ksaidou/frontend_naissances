@@ -1,8 +1,10 @@
+import { ApplicationContext } from "@/context/ApplicationContextProvider";
 import { search } from "@/services";
 import { Declaration } from "@/types/Declaration";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 function useDeclarations (){
+  const {state,updateDeclarations} = useContext(ApplicationContext);
   const filterRef = useRef<any>("");
   const[statusOrder, setStatusOrder] = useState(1);
   const [declarations,setDeclaration]= useState<Declaration[]>([]);
@@ -63,11 +65,19 @@ function useDeclarations (){
   const getDeclarations = async ()=>{
     const data = await search("declarations");
     setDeclaration(data);
+    updateDeclarations(data);
   }
   useEffect(()=>{
     getDeclarations();
   },[]);
 
-  return {declarations,sortByStatus,filterRef,filterDeclarations,filteredDeclarations,updateStatus};
+  return {
+    state,
+    declarations,
+    sortByStatus,
+    filterRef,
+    filterDeclarations,
+    filteredDeclarations,
+    updateStatus};
 }
 export{useDeclarations};

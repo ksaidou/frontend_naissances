@@ -4,13 +4,14 @@ import { useDeclarations } from "@/hooks";
 import { Link } from "react-router-dom";
 
 function Declarations() {
- const {declarations,
+ const {
+  state,
   sortByStatus,
   updateStatus,
   filterRef,
   filterDeclarations,
-  filteredDeclarations
   }   = useDeclarations();
+  console.log(state);
   return (
     <>
       <div className="bg-white shadow-md rounded-md flex justify-between items-center h-12 mb-3 py-2">
@@ -24,7 +25,7 @@ function Declarations() {
         <Link to={"/private/declarations/new"} className="bg-green-600 text-white px-2 py-2 mx-2 rounded-md"> nouvelle demande </Link>
     </div>
       <div className="bg-white shadow-md rounded-md">
-        <DeclarationsItems declarations ={filteredDeclarations.length ? filteredDeclarations : declarations}
+        <DeclarationsItems declarations ={state?.declarations}
         sortByStatus ={sortByStatus} updateStatus={updateStatus}/>     
       </div>
     </>
