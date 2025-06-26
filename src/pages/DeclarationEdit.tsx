@@ -202,10 +202,10 @@ function DeclarationEdit() {
 
       {display === 'SUCCESS'? (
         <article className="bg-white text-center px-10 py-10 rounded-md shadow-md">
-        <h1 className="text-3xl mb-6">Votre naissance a bien été enregistrée</h1>
-        <Link to={"/private/declarations"} className="border border-blue-600 text-blue-600 px-6 py-4
-         hover:bg-blue-600 hover:text-white">Afficher les déclarations</Link>
-    </article>
+          <h1 className="text-3xl mb-6">Votre naissance a bien été enregistrée</h1>
+          <Link to={"/private/declarations"} className="border border-blue-600 text-blue-600 px-6 py-4
+          hover:bg-blue-600 hover:text-white">Afficher les déclarations</Link>
+        </article>
       ) : null}
         
     </article>

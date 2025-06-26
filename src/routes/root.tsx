@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "@/App";
 import ErrorPage from "@/error-page";
 import PrivateLayout from "@/layouts/PrivateLayout";
@@ -6,6 +6,8 @@ import Declarations from "@/pages/Declarations";
 import Demandes from "@/pages/Demandes";
 import Home from "@/pages/Home";
 import DeclarationEdit from "@/pages/DeclarationEdit";
+import PublicLayout from "@/layouts/PublicLayout";
+import Login from "@/pages/account/Login";
 
 const router = createBrowserRouter([
   {
@@ -14,9 +16,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
      children: [
         {
-            index:true,
-            element:<Home />,
-
+            path:"/",
+            element:<PublicLayout/>,
+            children: [
+              {
+                index:true,
+                element: <Navigate to={"/connexion"} />,
+            },
+              {
+                  path: "/connexion",
+                  element: <Login />,
+              },
+            ]
         },
       {
         path: "private",

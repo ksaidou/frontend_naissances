@@ -2,9 +2,13 @@ import { Declaration } from '@/types/Declaration';
 import React, { useReducer, useState } from 'react'
 import { ApplicationReducer } from './ApplicationReducer';
 import { INITIAL_STATE, UPDATE_DECLARATION_STATUS, UPDATE_DECLARATIONS } from '@/utils';
+import { Demande } from '@/types/Demande';
 
 type stateData = {
     declarations : Declaration[];
+    demandes : Demande[];
+    title : string ; 
+    token? : string;
 };
 type Props = {
     state : stateData;
@@ -27,7 +31,13 @@ function ApplicationContextProvider({children}:any) {
         dispatch({type: UPDATE_DECLARATION_STATUS, data:{id,status}});
     };
   return (
-    <ApplicationContext.Provider value={{state,updateDeclarations,updateDeclarationStatus}}>
+    <ApplicationContext.Provider 
+    value={
+            {state,
+                updateDeclarations,
+                updateDeclarationStatus
+            }
+        }>
         {children}
     </ApplicationContext.Provider>
   )

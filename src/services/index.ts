@@ -2,7 +2,7 @@ const host = "http://localhost:8080";
 
 const search = async (url:string) =>{
     const response = await fetch(
-            `${host}/${url}`,
+            `${host}/backend/${url}`,
              {
                 headers:{'accept':'application/json'}
             });
@@ -12,7 +12,7 @@ const search = async (url:string) =>{
 
 const create = async (url:string, body:any) =>{
     const response = await fetch(
-            `${host}/${url}`,
+            `${host}/backend/${url}`,
              {
                 headers:{'accept':'application/json', 'content-type':'application/json' },
                 body:JSON.stringify(body),
