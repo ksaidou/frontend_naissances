@@ -9,7 +9,7 @@ function PublicLayout() {
     <>
       {token ? 
           ( 
-          < Navigate to={"/private/demandes"}/> 
+          < Navigate to={"/private/declarations"}/> 
           ) 
         : 
           ( 

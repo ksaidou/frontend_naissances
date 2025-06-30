@@ -4,7 +4,6 @@ import ErrorPage from "@/error-page";
 import PrivateLayout from "@/layouts/PrivateLayout";
 import Declarations from "@/pages/Declarations";
 import Demandes from "@/pages/Demandes";
-import Home from "@/pages/Home";
 import DeclarationEdit from "@/pages/DeclarationEdit";
 import PublicLayout from "@/layouts/PublicLayout";
 import Login from "@/pages/account/Login";
@@ -22,7 +21,7 @@ const router = createBrowserRouter([
               {
                 index:true,
                 element: <Navigate to={"/connexion"} />,
-            },
+              },
               {
                   path: "/connexion",
                   element: <Login />,
@@ -34,8 +33,10 @@ const router = createBrowserRouter([
         element: <PrivateLayout />,
          children: [
         {
-            path: "declarations",
-            element: <Declarations />,
+            /*index:true,
+            element: <Navigate to={"/private/declarations"} />, */
+            path:"declarations",
+            element:<Declarations />,
         },
         {
           path: "declarations/new",

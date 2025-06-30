@@ -34,7 +34,7 @@ const {demandes,sortByStatus} = UseDemandes();
             <span className="p-1">{item.owner.gender}</span>
             <span className="p-1">{item.owner.firstname}</span>
             <span className="p-1 uppercase">{item.owner.lastname}</span>
-            <span className="p-1 col-span-2">{item.owner.birthdate ? formatDate(item.owner.birthdate): null}</span>
+            <span className="p-1 col-span-2">{item.owner.birthdate? formatDate(item.owner.birthdate): null}</span>
             <span className={`col-span-2 ${getStatusColors(item.status)}`}>{getStatusLabel(item.status)}</span>
             <span className="p-1">Action</span>
         </article>

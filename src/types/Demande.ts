@@ -1,3 +1,4 @@
+import { Child } from "./Child"
 import { Compagny } from "./Compagny"
 import { Profile } from "./Profile"
 
@@ -8,6 +9,6 @@ export type Demande ={
     status :string,
     registred : string,
     compagny : Compagny,
-    owner : Profile,
+    owner : Child,
     demandeur : Profile
 }

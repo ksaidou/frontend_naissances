@@ -1,9 +1,10 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { create } from "@/services";
+import { ApplicationContext } from "@/context/ApplicationContextProvider";
 
 const REQUIRER_FIELD = "Ce champ est requis";
 
@@ -21,6 +22,7 @@ const schema = yup
 
 
 function Login() {
+    const {setToken} = useContext(ApplicationContext);
     const {
         register,
         handleSubmit,
@@ -32,20 +34,27 @@ function Login() {
 
     const [display,setDisplay] = useState("FORM");
 
-    const onSubmit: SubmitHandler<Credential> = async (data) => {
-        const response = await create('sign-in',data);
+    //console.log(display);
+
+    const onSubmit: SubmitHandler<Credential> = async (credentials) => {
+        const response = await create('sign-in',credentials);
         const {status} = response;
-        if(status===201){
-            reset();
+        const {bearer} = await response.json();
+        console.log({bearer});
+        console.log(status)
+
+        if(status===200){
+            setToken({token : bearer});
             setDisplay("SUCCESS");
+            reset();
         }
     };
 
-    if(display === "SUCCESS"){
+    if(display === 'SUCCESS'){
         <article className="bg-white text-center px-10 py-10 rounded-md shadow-md">
-        <h1 className="text-3xl mb-6">Vous etes connecté</h1>
-        < Navigate to={"/private/declarations"}/>
-    </article>
+            <h1 className="text-3xl mb-6">Vous etes connecté</h1>
+            < Navigate to={"/private/declarations"}/>
+        </article>
     }
 
     return (
