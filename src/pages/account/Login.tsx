@@ -36,9 +36,7 @@ function Login() {
         mutationFn: (credentials:Credential) => create("sign-in",credentials),
         onSuccess: async (response : Response) => {
             const {bearer} = await response.json();
-            console.log(bearer);
             setToken({token:bearer});
-            console.log(bearer);
             reset();
         },
       })

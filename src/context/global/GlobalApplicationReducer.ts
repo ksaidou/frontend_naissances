@@ -1,9 +1,13 @@
-import { APPLICATION_STATE, DELETE_TOKEN, FILTER_REQUESTS, SET_REQUEST_STATUS, SET_REQUESTS, SET_TOKEN, UPDATE_TITLE } from "@/utils/globalstate";
+import { APPLICATION_STATE, APPLICATION_STATE_KEY, DELETE_TOKEN, FILTER_REQUESTS, SET_REQUEST_STATUS, SET_REQUESTS, SET_TOKEN, UPDATE_TITLE } from "@/utils/globalstate";
 
 
 function GlobalApplicationContextReducer(state: any = APPLICATION_STATE, action: any){
     
     const { type, data } = action;
+    /*const sessionState = sessionStorage.getItem(APPLICATION_STATE_KEY)
+    if(sessionState) {
+      state = JSON.parse(sessionState);
+    }*/
     
     switch (type) {
         case SET_REQUESTS:
@@ -39,7 +43,7 @@ function GlobalApplicationContextReducer(state: any = APPLICATION_STATE, action:
             state = { ...state, requestFilter: data };
             break;
         }
-
+        return state;
 }
 
 

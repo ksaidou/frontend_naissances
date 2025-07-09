@@ -38,13 +38,10 @@ function ApplicationContextProvider({children}:any) {
     /*const updateTitle = (data:any) =>{
         dispatch({type: UPDATE_TITLE, data});
     };*/
-
   
     useEffect(()=>{
         dispatch ({})},
         []);
-
-
 
   return (
     <ApplicationContext.Provider 

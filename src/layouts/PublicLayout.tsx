@@ -5,8 +5,8 @@ import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 function PublicLayout() {
-  const { state :{token} } = useContext(GlobalApplicationContext);
-  console.log( token);
+  const { state:{token}} = useContext(GlobalApplicationContext);
+  //console.log(state);
   return (
     <>
       {token ?

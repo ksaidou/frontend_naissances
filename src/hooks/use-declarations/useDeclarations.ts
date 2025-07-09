@@ -8,9 +8,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 function useDeclarations (){
   const {updateTitle, state :{token}} = useContext(GlobalApplicationContext);
-  const {data} = useQuery({ queryKey: ['declarations'], queryFn: () => search({path: "declarations", token}) });
-  //console.log(data);
+  const {data,error} = useQuery({ queryKey: ['declarations'], queryFn: () => search({path: "declarations", token}) });
+  console.log(data,error);
   const {state,updateDeclarations,updateDeclarationStatus} = useContext(ApplicationContext); 
+  console.log(state);
   const filterRef = useRef<any>("");  
   const[statusOrder, setStatusOrder] = useState(1);
   const [declarations,setDeclaration]= useState<Declaration[]>(state.declarations);
@@ -76,9 +77,10 @@ function useDeclarations (){
     updateDeclarations(data);
   }*/
   useEffect(()=>{
-    updateTitle({Title :"Déclaration"});
-    setDeclaration(data);
-    updateDeclarations(data);
+    updateTitle({"title" :"Déclaration"});
+    console.log(data);
+    //setDeclaration(data);
+    //updateDeclarations(data);
   },[data]);
 
   return {

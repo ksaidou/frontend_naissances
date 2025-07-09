@@ -13,7 +13,7 @@ function Declarations() {
   filteredDeclarations,
   declarations,
   }   = useDeclarations();
-  console.log(state);
+  //console.log(state);
   return (
     <>
       <div className="bg-white shadow-md rounded-md flex justify-between items-center h-12 mb-3 py-2">
