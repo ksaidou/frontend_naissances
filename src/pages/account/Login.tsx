@@ -1,10 +1,10 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { useContext, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useContext } from "react";
 import { create } from "@/services";
-import { ApplicationContext } from "@/context/ApplicationContextProvider";
+import { useMutation } from "@tanstack/react-query";
+import { GlobalApplicationContext } from "@/context/global/GlobalApplicationContextProvider";
 
 const REQUIRER_FIELD = "Ce champ est requis";
 
@@ -22,7 +22,7 @@ const schema = yup
 
 
 function Login() {
-    const {setToken} = useContext(ApplicationContext);
+    const {setToken} = useContext(GlobalApplicationContext);
     const {
         register,
         handleSubmit,
@@ -32,30 +32,21 @@ function Login() {
         resolver: yupResolver(schema),
     });
 
-    const [display,setDisplay] = useState("FORM");
+    const mutation = useMutation({
+        mutationFn: (credentials:Credential) => create("sign-in",credentials),
+        onSuccess: async (response : Response) => {
+            const {bearer} = await response.json();
+            console.log(bearer);
+            setToken({token:bearer});
+            console.log(bearer);
+            reset();
+        },
+      })
 
-    //console.log(display);
 
     const onSubmit: SubmitHandler<Credential> = async (credentials) => {
-        const response = await create('sign-in',credentials);
-        const {status} = response;
-        const {bearer} = await response.json();
-        console.log({bearer});
-        console.log(status)
-
-        if(status===200){
-            setToken({token : bearer});
-            setDisplay("SUCCESS");
-            reset();
-        }
+        mutation.mutate(credentials);
     };
-
-    if(display === 'SUCCESS'){
-        <article className="bg-white text-center px-10 py-10 rounded-md shadow-md">
-            <h1 className="text-3xl mb-6">Vous etes connecté</h1>
-            < Navigate to={"/private/declarations"}/>
-        </article>
-    }
 
     return (
     <div className="flex flex-col justify-between md:justify-center">

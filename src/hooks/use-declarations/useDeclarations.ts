@@ -1,13 +1,19 @@
+
 import { ApplicationContext } from "@/context/ApplicationContextProvider";
+import { GlobalApplicationContext } from "@/context/global/GlobalApplicationContextProvider";
 import { search } from "@/services";
 import { Declaration } from "@/types/Declaration";
+import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useRef, useState } from "react";
 
 function useDeclarations (){
-  const {state,updateDeclarations,updateDeclarationStatus} = useContext(ApplicationContext);
-  const filterRef = useRef<any>("");
+  const {updateTitle, state :{token}} = useContext(GlobalApplicationContext);
+  const {data} = useQuery({ queryKey: ['declarations'], queryFn: () => search({path: "declarations", token}) });
+  //console.log(data);
+  const {state,updateDeclarations,updateDeclarationStatus} = useContext(ApplicationContext); 
+  const filterRef = useRef<any>("");  
   const[statusOrder, setStatusOrder] = useState(1);
-  const [declarations,setDeclaration]= useState<Declaration[]>([]);
+  const [declarations,setDeclaration]= useState<Declaration[]>(state.declarations);
   const [filteredDeclarations,setFilteredDeclaration]= useState<Declaration[]>([]);
 
   const updateStatusWithoutContext = (data:{id:string, status:string})=>{
@@ -64,14 +70,16 @@ function useDeclarations (){
 
   }
 
-  const getDeclarations = async ()=>{
+  /*const getDeclarations = async ()=>{
     const data = await search("declarations");
     setDeclaration(data);
     updateDeclarations(data);
-  }
+  }*/
   useEffect(()=>{
-    getDeclarations();
-  },[]);
+    updateTitle({Title :"Déclaration"});
+    setDeclaration(data);
+    updateDeclarations(data);
+  },[data]);
 
   return {
     state,

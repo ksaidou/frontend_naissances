@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom"
 import Nav from "../components/nav/Nav"
 import { useContext } from "react"
-import {ApplicationContext} from "@/context/ApplicationContextProvider"
+import { GlobalApplicationContext } from "@/context/global/GlobalApplicationContextProvider";
 
 function PrivateLayout() {
-  const { state: { title,token },} = useContext(ApplicationContext);
+  const { state: { title,token },} = useContext(GlobalApplicationContext);
   return (
     <>
       {token ? 

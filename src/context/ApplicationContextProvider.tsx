@@ -1,22 +1,22 @@
 import { Declaration } from '@/types/Declaration';
-import React, { useReducer, useState } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { ApplicationReducer } from './ApplicationReducer';
-import { INITIAL_STATE, SET_TOKEN, UPDATE_DECLARATION_STATUS, UPDATE_DECLARATIONS,UPDATE_TITLE } from '@/utils';
+import { INITIAL_STATE, UPDATE_DECLARATION_STATUS, UPDATE_DECLARATIONS } from '@/utils';
 import { Demande } from '@/types/Demande';
 
 type stateData = {
     declarations : Declaration[];
     demandes : Demande[];
-    title : string ; 
-    token? : string;
+    //title : string ; 
+    //token? : string;
 };
 type Props = {
     state : stateData;
-    updateTitle: (data : any) => void;
+    //updateTitle: (data : any) => void;
     updateDeclarations: (declarations :Declaration[]) => void;
     updateDeclarationStatus: ({id,status} : {id:string,status:string}) => void;
-    setToken: (data : any) => void;
-    deleteToken: () => void;
+    //setToken: (data : any) => void;
+    //deleteToken: () => void;
 };
 
 //  creer le contexte
@@ -35,17 +35,14 @@ function ApplicationContextProvider({children}:any) {
         dispatch({type: UPDATE_DECLARATION_STATUS, data:{id,status}});
     };
 
-    const updateTitle = (data:any) =>{
+    /*const updateTitle = (data:any) =>{
         dispatch({type: UPDATE_TITLE, data});
-    };
+    };*/
 
-    const setToken = (data : any) => {
-        dispatch({type: SET_TOKEN, data});
-    }
-
-    const deleteToken = () => {
-        dispatch({type: UPDATE_TITLE});
-    }
+  
+    useEffect(()=>{
+        dispatch ({})},
+        []);
 
 
 
@@ -55,9 +52,7 @@ function ApplicationContextProvider({children}:any) {
             {state,
                 updateDeclarations,
                 updateDeclarationStatus,
-                updateTitle,
-                setToken,
-                deleteToken
+                //updateTitle
             }
         }>
         {children}

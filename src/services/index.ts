@@ -1,9 +1,16 @@
+type Params ={
+    path: string;
+    token? : string;
+};
 
-const search = async (url:string) =>{
+const search = async ({path,token} : Params) =>{
     const response = await fetch(
-            `/backend/${url}`,
+            `/backend/${path}`,
              {
-                headers:{'accept':'application/json'}
+                headers:{
+                    'accept':'application/json',
+                    'Authorization':`bearer ${token}`
+                }
             });
     const data = await response.json();
     return data;

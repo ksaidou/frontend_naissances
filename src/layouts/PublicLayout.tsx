@@ -1,10 +1,12 @@
 import Banner from "@/components/shared/Banner";
-import { ApplicationContext } from "@/context/ApplicationContextProvider";
+
+import { GlobalApplicationContext } from "@/context/global/GlobalApplicationContextProvider";
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 function PublicLayout() {
-  const { state : {token} } = useContext(ApplicationContext);
+  const { state :{token} } = useContext(GlobalApplicationContext);
+  console.log( token);
   return (
     <>
       {token ? 
