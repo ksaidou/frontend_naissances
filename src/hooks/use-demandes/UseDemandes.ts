@@ -1,10 +1,13 @@
+import { GlobalApplicationContext } from '@/context/global/GlobalApplicationContextProvider';
 import { search } from '@/services';
 import { Demande } from '@/types/Demande';
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 function UseDemandes() {
     const[demandes,setDemandes] = useState<Demande[]>([]);
     const[sortOrder, setSortOrder] = useState(1);
+
+    const {state:{token}} = useContext(GlobalApplicationContext);
 
     const sortByStatus = ()=>{
         const sortedDemandes = demandes.sort((item1:Demande, item2:Demande)=>{
@@ -27,7 +30,7 @@ function UseDemandes() {
     }
 
     const getDemandes = async ()=>{
-        const data = await search("request");
+        const data = await search({path: "request", token});
         setDemandes(data);
     }
     useEffect(()=>{

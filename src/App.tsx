@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import GlobalApplicationContextProvider from "./context/global/GlobalApplicationContextProvider"
 
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({defaultOptions:{queries:{}}});
 
 function App() {
 
@@ -18,7 +18,7 @@ function App() {
         </QueryClientProvider>
      </ApplicationContextProvider>
     </GlobalApplicationContextProvider>
-  )
+  );
 }
 
 export default App

@@ -9,7 +9,7 @@ function PublicLayout() {
   console.log( token);
   return (
     <>
-      {token ? 
+      {token ?
           ( 
           < Navigate to={"/private/declarations"}/> 
           ) 
