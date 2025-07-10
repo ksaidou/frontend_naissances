@@ -1,5 +1,6 @@
 
 import DeclarationsItems from "@/components/declarations/DeclarationsItems";
+import Debug from "@/components/shared/Debug";
 import { useDeclarations } from "@/hooks";
 import { Link } from "react-router-dom";
 
@@ -16,6 +17,7 @@ function Declarations() {
   //console.log(state);
   return (
     <>
+    <>{/*JSON.stringify(declarations,null,2)*/}</>
       <div className="bg-white shadow-md rounded-md flex justify-between items-center h-12 mb-3 py-2">
         <input type="text" name="recherche" 
         id="rechercher" 
@@ -30,8 +32,9 @@ function Declarations() {
         <DeclarationsItems declarations ={filteredDeclarations && filteredDeclarations.length ? filteredDeclarations : declarations}
         sortByStatus ={sortByStatus} updateStatus={updateStatus}/>     
       </div>
+      <Debug data={declarations}/>
     </>
-  )
+  );
 }
 
 export default Declarations

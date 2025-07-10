@@ -8,15 +8,24 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 function useDeclarations (){
   const {updateTitle, state :{token}} = useContext(GlobalApplicationContext);
-  const {data,error} = useQuery({ queryKey: ['declarations'], queryFn: () => search({path: "declarations", token}) });
+  const {data,error} = useQuery({ 
+    queryKey: ['declarations'], 
+    queryFn: () => search({path: "declarations", token}),
+    retry:2
+  });
+  console.log("----------------");
   console.log(data,error);
+  console.log("----------------");
+
+  
   const {state,updateDeclarations,updateDeclarationStatus} = useContext(ApplicationContext); 
-  console.log(state);
+  //console.log(state);
   const filterRef = useRef<any>("");  
   const[statusOrder, setStatusOrder] = useState(1);
   const [declarations,setDeclaration]= useState<Declaration[]>(state.declarations);
   const [filteredDeclarations,setFilteredDeclaration]= useState<Declaration[]>([]);
 
+ 
   const updateStatusWithoutContext = (data:{id:string, status:string})=>{
     const declarationToUpdate = declarations.filter(({id}:Declaration) => id === data.id)[0];
     const declarationUpdated = {...declarationToUpdate,status:data.status};
@@ -34,10 +43,10 @@ function useDeclarations (){
     {
       //console.log(filter.lenght);
       const filteredDeclarations = declarations.filter((item)=>{
-        const {child:{firstname, lastname}} = item;
+        const {child:{firstName, lastName}} = item;
         return (
-          firstname.toLowerCase().indexOf(filter.toLowerCase()) > -1||
-          lastname.toLowerCase().includes(filter.toLowerCase())
+          firstName.toLowerCase().indexOf(filter.toLowerCase()) > -1||
+          lastName.toLowerCase().includes(filter.toLowerCase())
         );
 
       });
@@ -78,9 +87,9 @@ function useDeclarations (){
   }*/
   useEffect(()=>{
     updateTitle({"title" :"Déclaration"});
-    console.log(data);
-    //setDeclaration(data);
-    //updateDeclarations(data);
+    //console.log(state);
+    setDeclaration(data);
+    updateDeclarations(data);
   },[data]);
 
   return {

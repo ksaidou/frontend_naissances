@@ -1,5 +1,5 @@
 import { Child } from "./Child"
-import { Compagny } from "./Compagny"
+import { Company } from "./Company"
 import { Profile } from "./Profile"
 
 export type Declaration ={
@@ -7,8 +7,8 @@ export type Declaration ={
     picture? : string,
     comment : string,
     status : string,
-    registred : string,
-    compagny : Compagny,
+    registered : string,
+    company : Company,
     child : Child,
     firstParent : Profile,
     secondParent : Profile

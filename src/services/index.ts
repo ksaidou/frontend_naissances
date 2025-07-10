@@ -1,9 +1,11 @@
+
 type Params ={
     path: string;
     token? : string;
 };
 
 const search = async ({path,token} : Params) =>{
+    console.log(path,token);
     const response = await fetch(
             `/backend/${path}`,
              {
@@ -13,6 +15,7 @@ const search = async ({path,token} : Params) =>{
                 }
             });
     const data = await response.json();
+    console.log(data);
     return data;
 }
 
@@ -26,4 +29,5 @@ const create = async (url:string, body:any) =>{
             });
     return response;
 }
+
 export{search,create};
