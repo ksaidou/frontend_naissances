@@ -27,10 +27,18 @@ function DeclarationsItems(props: Props) {
             <span className="col-span-2 pl-6">ACTION</span>
         </article>
       {
-        declarations.map((item:Declaration, index:number)=>
-        (
-          <DeclarationItem declaration={item} index={index} key={item.id} action={updateStatus}/>
-        ))}
+        <>
+          {
+            declarations? 
+            declarations.map((item:Declaration, index:number)=>
+            (
+              <DeclarationItem declaration={item} index={index} key={item.id} action={updateStatus}/>
+            ))
+            :
+            null
+          }
+        </>
+      }
     </>
   );
 }

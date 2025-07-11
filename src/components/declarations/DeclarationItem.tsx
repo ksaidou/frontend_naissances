@@ -15,7 +15,7 @@ function DeclarationItem({declaration:item, index, action}: Props) {
     <article 
           className={`grid grid-cols-12 border-t border-gray-300 col-span-2 items-center 
           ${index % 2 === 0 ? "bg-gray-100" : null}`}>
-            <span className="pl-2">{formatDate(item.registered)}</span>
+            <span className="pl-2">{/*formatDate(item.registered)*/}</span>
             <span className="col-span-2 flex flex-col pl-5">
               <span>{item.child.firstName}</span>
               <span className="uppercase">{item.child.lastName}</span>
