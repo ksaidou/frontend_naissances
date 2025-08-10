@@ -31,18 +31,22 @@ const create = async ({url,token, body}:any) =>{
             });
 }
 
-const partialUpdate = async ({url,token, body}:any) =>{
-    console.log("-----Url-----");
-    console.log(url);
+const partialUpdate = async ({path,token, body}:any) =>{
+    /*console.log("-----Url partialUpdate-----");
+    console.log(path);
+    console.log("-----Url partialUpdate_FIN-----");*/
+    //console.log(token);
+    //url ='declarations/1/status'
+   // console.log(url);
+    //console.log(body);
     return await axios(
              {
                 method:'PATCH',
-                url: `/backend/${url}`,
+                url: `/backend/${path}`,
                 data: body,
                 headers:{'accept':'application/json','content-type':'application/json',
                     ...(token ? ({ 'Authorization': `Bearer ${token}`}): null) },
             });
-           // console.log(url);
 }
 
 

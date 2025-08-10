@@ -44,8 +44,15 @@ function useDeclarations (){
   };*/
 
   //const updateStatus = (data:{id:string, status:string})=> updateDeclarationStatus(data);
-  const updateStatus = (data:{id:string, status:string})=> partialUpdateMutation.mutate({path:`declarations/${data.id}/status`,data});
-  console.log(updateStatus);
+  const updateStatus = (data:{id:string, status:string})=> {
+    const url = `declarations/${data.id}/status`;
+    console.log("---UseDeclarations_UpdateStatus_DEBUT----");
+    console.log(data.id);
+    console.log(url);
+    console.log("---UseDeclarations_UpdateStatus_FIN----");
+    partialUpdateMutation.mutate({path:`declarations/${data.id}/status`,data})
+  };
+  //console.log(updateStatus);
 
   const filterDeclarations = ()=>{
     const filter = filterRef.current.value || "";

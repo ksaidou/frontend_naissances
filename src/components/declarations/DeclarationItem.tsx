@@ -12,14 +12,29 @@ type Props ={
 
 function DeclarationItem({declaration:item, index, action}: Props) {
   const getLastStatus = (declaration : any) =>{
-    const status = declaration.statuses.sort(({registered}:{registered :Date}) => registered)[0];
+    const status = declaration.statuses.sort((fItem:any, sItem:any) => {
+      const {creation : fCreation} = fItem; 
+      const {creation : sCreation} = sItem; 
+      return new Date(sCreation).getTime() - new Date(fCreation).getTime();
+    })[0]; 
+
     const {
       status :{name},
     } = status;
 
     return name;
-
   };
+
+  const getDate = (declaration: any) => {
+    const status = declaration.statuses.filter((item: any) => {
+      const {
+        status: { name },
+      } = item;
+      return name.toUpperCase() === "NEW";
+    })[0];
+    return status ? status.registered : null;
+  };
+
   return (
     <>
     <article 
@@ -45,7 +60,6 @@ function DeclarationItem({declaration:item, index, action}: Props) {
             <StatusBadge status={getLastStatus(item)}/>
             <ActionButton classes="col-span-2 mx-3" action={action} id={`${item.id}`} />
         </article>
-        <Debug data={item?.statuses}/>
     </>
   )
 }
