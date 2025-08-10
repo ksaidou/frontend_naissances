@@ -4,7 +4,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import GlobalApplicationContextProvider from "./context/global/GlobalApplicationContextProvider"
 
 
-const queryClient = new QueryClient({defaultOptions:{queries:{}}});
+const queryClient = new QueryClient(
+  {defaultOptions:
+    {queries:{staleTime:60000}
+  }
+});
 
 function App() {
 

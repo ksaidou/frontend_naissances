@@ -10,7 +10,7 @@ type Props ={
 
 function DeclarationsItems(props: Props) {
    const {declarations, sortByStatus, updateStatus} = props;
-   console.log(declarations);
+   //console.log(declarations);
   return (
     <>
          <article className="grid grid-cols-12 items-center">

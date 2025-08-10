@@ -1,24 +1,33 @@
 
 import { ApplicationContext } from "@/context/ApplicationContextProvider";
 import { GlobalApplicationContext } from "@/context/global/GlobalApplicationContextProvider";
-import { search } from "@/services";
+import { partialUpdate, search } from "@/services";
 import { Declaration } from "@/types/Declaration";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext, useEffect, useRef, useState } from "react";
 
 function useDeclarations (){
+
+  const queryClient = useQueryClient();
+
   const {updateTitle, state :{token}} = useContext(GlobalApplicationContext);
-  const {data,error} = useQuery({ 
+
+  const {data} = useQuery({ 
     queryKey: ['declarations'], 
     queryFn: () => search({path: "declarations", token}),
     retry:2
   });
-  console.log("----------------");
+  /*console.log("----------------");
   console.log(data,error);
-  console.log("----------------");
-
+  console.log("----------------"); */
+  const partialUpdateMutation = useMutation({
+    mutationFn: ({path,data}:any) => partialUpdate({path, token, body:data}),
+     onSettled: () =>{
+      queryClient.invalidateQueries({queryKey:  ['declarations']})
+    }
+  });
   
-  const {state,updateDeclarations,updateDeclarationStatus} = useContext(ApplicationContext); 
+  const {state,updateDeclarations} = useContext(ApplicationContext); 
   //console.log(state);
   const filterRef = useRef<any>("");  
   const[statusOrder, setStatusOrder] = useState(1);
@@ -26,15 +35,17 @@ function useDeclarations (){
   const [filteredDeclarations,setFilteredDeclaration]= useState<Declaration[]>([]);
 
  
-  const updateStatusWithoutContext = (data:{id:string, status:string})=>{
+  /*const updateStatusWithoutContext = (data:{id:string, status:string})=>{
     const declarationToUpdate = declarations.filter(({id}:Declaration) => id === data.id)[0];
     const declarationUpdated = {...declarationToUpdate,status:data.status};
     const declarationsToKeep = declarations.filter(({id}:Declaration) => id !== data.id);
     setDeclaration([...declarationsToKeep,declarationUpdated]);
-    /*console.log(declarationToUpdate);*/
-  };
+    console.log(declarationToUpdate);
+  };*/
 
-  const updateStatus = (data:{id:string, status:string})=> updateDeclarationStatus(data);
+  //const updateStatus = (data:{id:string, status:string})=> updateDeclarationStatus(data);
+  const updateStatus = (data:{id:string, status:string})=> partialUpdateMutation.mutate({path:`declarations/${data.id}/status`,data});
+  console.log(updateStatus);
 
   const filterDeclarations = ()=>{
     const filter = filterRef.current.value || "";
@@ -87,7 +98,6 @@ function useDeclarations (){
   }*/
   useEffect(()=>{
     updateTitle({"title" :"Déclaration"});
-    //console.log(state);
     setDeclaration(data);
     updateDeclarations(data);
   },[data]);

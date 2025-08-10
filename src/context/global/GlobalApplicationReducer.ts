@@ -1,4 +1,5 @@
-import { APPLICATION_STATE, APPLICATION_STATE_KEY, DELETE_TOKEN, FILTER_REQUESTS, SET_REQUEST_STATUS, SET_REQUESTS, SET_TOKEN, UPDATE_TITLE } from "@/utils/globalstate";
+import { INITIAL_STATE } from "@/utils";
+import { APPLICATION_STATE, DELETE_TOKEN, FILTER_REQUESTS, LOGOUT, SET_CURRENT_USER, SET_REQUEST_STATUS, SET_REQUESTS, SET_TOKEN, UPDATE_TITLE } from "@/utils/globalstate";
 
 
 function GlobalApplicationContextReducer(state: any = APPLICATION_STATE, action: any){
@@ -36,12 +37,20 @@ function GlobalApplicationContextReducer(state: any = APPLICATION_STATE, action:
           case SET_TOKEN:
               state = { ...state, token: data.token };
               break;
+          case SET_CURRENT_USER:
+              const {role} = data || {};
+              state = { ...state, user: {role} };
+              break;
           case DELETE_TOKEN:
               state = delete state.token;
               break;
           case FILTER_REQUESTS:
             state = { ...state, requestFilter: data };
             break;
+
+          case LOGOUT:
+              state = INITIAL_STATE;
+              break;
         }
         return state;
 }

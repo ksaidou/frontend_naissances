@@ -2,6 +2,7 @@ import { Navigate, Outlet } from "react-router-dom"
 import Nav from "../components/nav/Nav"
 import { useContext } from "react"
 import { GlobalApplicationContext } from "@/context/global/GlobalApplicationContextProvider";
+import Header from "@/components/shared/Header";
 
 function PrivateLayout() {
   const { state: { title,token },} = useContext(GlobalApplicationContext);
@@ -12,10 +13,7 @@ function PrivateLayout() {
         <section className=" min-h-screen">
         <Nav/>
           <main className="wrapper pl-64 pr-5">
-            <header className="flex justify-between my-3 text-xl font-bold">
-              <h3>{title}</h3>
-              <span>Saïdou</span>
-            </header>
+            <Header/>
             <Outlet/>
           </main>
       </section>

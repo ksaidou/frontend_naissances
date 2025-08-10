@@ -9,6 +9,7 @@ function ApplicationReducer (state: any = INITIAL_STATE, action: any){
                 declarations:data
             };
             break;
+            
         case UPDATE_DECLARATION_STATUS:
             const {id: idToUpdate, status} = data;
             const allDeclarations = state.declarations;

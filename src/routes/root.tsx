@@ -2,9 +2,9 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "@/App";
 import ErrorPage from "@/error-page";
 import PrivateLayout from "@/layouts/PrivateLayout";
-import Declarations from "@/pages/Declarations";
+import Declarations from "@/pages/declarations/Declarations";
 import Demandes from "@/pages/Demandes";
-import DeclarationEdit from "@/pages/DeclarationEdit";
+import DeclarationEdit from "@/pages/declarations/DeclarationEdit";
 import PublicLayout from "@/layouts/PublicLayout";
 import Login from "@/pages/account/Login";
 
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             element:<Declarations />,
         },
         {
-          path: "declarations/new",
+          path: "declarations/nouvelle-declaration",
           element: <DeclarationEdit />,
       },
         {

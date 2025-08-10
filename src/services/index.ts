@@ -1,3 +1,4 @@
+import axios from "axios";
 
 type Params ={
     path: string;
@@ -5,8 +6,8 @@ type Params ={
 };
 
 const search = async ({path,token} : Params) =>{
-    console.log(path,token);
-    const response = await fetch(
+    //console.log(path,token);
+    const response = await axios.get(
             `/backend/${path}`,
              {
                 headers:{
@@ -14,20 +15,35 @@ const search = async ({path,token} : Params) =>{
                     'Authorization':`bearer ${token}`
                 }
             });
-    const data = await response.json();
-    console.log(data);
+    const {data} = response;
+    //console.log(data);
     return data;
 }
 
-const create = async (url:string, body:any) =>{
-    const response = await fetch(
-            `/backend/${url}`,
+const create = async ({url,token, body}:any) =>{
+    return await axios(
              {
-                headers:{'accept':'application/json', 'content-type':'application/json' },
-                body:JSON.stringify(body),
-                method:'POST'
+                method:'POST',
+                url: `/backend/${url}`,
+                data: body,
+                headers:{'accept':'application/json','content-type':'application/json',
+                    ...(token ? ({ 'Authorization': `Bearer ${token}`}): null) },
             });
-    return response;
 }
 
-export{search,create};
+const partialUpdate = async ({url,token, body}:any) =>{
+    console.log("-----Url-----");
+    console.log(url);
+    return await axios(
+             {
+                method:'PATCH',
+                url: `/backend/${url}`,
+                data: body,
+                headers:{'accept':'application/json','content-type':'application/json',
+                    ...(token ? ({ 'Authorization': `Bearer ${token}`}): null) },
+            });
+           // console.log(url);
+}
+
+
+export{search,create,partialUpdate};

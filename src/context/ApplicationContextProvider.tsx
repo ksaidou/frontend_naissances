@@ -7,16 +7,11 @@ import { Demande } from '@/types/Demande';
 type stateData = {
     declarations : Declaration[];
     demandes : Demande[];
-    //title : string ; 
-    //token? : string;
 };
 type Props = {
     state : stateData;
-    //updateTitle: (data : any) => void;
     updateDeclarations: (declarations :Declaration[]) => void;
     updateDeclarationStatus: ({id,status} : {id:string,status:string}) => void;
-    //setToken: (data : any) => void;
-    //deleteToken: () => void;
 };
 
 //  creer le contexte
@@ -28,33 +23,22 @@ function ApplicationContextProvider({children}:any) {
    
     const updateDeclarations = (declarations : Declaration[]) =>{
         dispatch({type: UPDATE_DECLARATIONS, data:declarations});
-       // setState((current)=>({...current, declarations}));
     };
     
     const updateDeclarationStatus = ({id,status}: {id:string, status:string}) =>{
         dispatch({type: UPDATE_DECLARATION_STATUS, data:{id,status}});
     };
 
-    /*const updateTitle = (data:any) =>{
-        dispatch({type: UPDATE_TITLE, data});
-    };*/
-  
-    useEffect(()=>{
+     /* useEffect(()=>{
         dispatch ({})},
-        []);
+        []);*/
 
   return (
     <ApplicationContext.Provider 
-    value={
-            {state,
-                updateDeclarations,
-                updateDeclarationStatus,
-                //updateTitle
-            }
-        }>
+    value={{state,updateDeclarations,updateDeclarationStatus,}}>
         {children}
     </ApplicationContext.Provider>
-  )
+  );
 }
 
 export default ApplicationContextProvider;

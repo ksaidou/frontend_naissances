@@ -8,7 +8,9 @@ import { APPLICATION_STATE,
   SET_REQUESTS, 
   SET_TOKEN, 
   UPDATE_TITLE,
-  UPDATE_DECLARATIONS } from "@/utils";
+  UPDATE_DECLARATIONS, 
+  LOGOUT,
+  SET_CURRENT_USER} from "@/utils";
 
 
 type User = {
@@ -30,10 +32,10 @@ type Props = {
     updateRequestStatus: (data: any) => void;
     updateTitle: (data: any) => void;
     setToken: (data: any) => void;
-    //setCurrentUser: (data: any) => void;
+    setCurrentUser: (data: any) => void;
     deleteToken: () => void;
     updateDeclarations: (data: any) => void;
-    //logout: () => void;
+    logout: () => void;
   };
 
   export const GlobalApplicationContext = createContext<Props>({} as Props);
@@ -51,8 +53,14 @@ type Props = {
     const setToken = (data: any) => {
       dispatch({ type: SET_TOKEN, data });
     };
+    const setCurrentUser = (data: any) => {
+      dispatch({ type: SET_CURRENT_USER, data });
+    };
     const deleteToken = () => {
       dispatch({ type: DELETE_TOKEN });
+    };
+    const logout = () => {
+      dispatch({ type: LOGOUT });
     };
     const updateTitle = (data: any) => {
       dispatch({ type: UPDATE_TITLE, data });
@@ -79,11 +87,13 @@ type Props = {
           state,
           deleteToken,
           setToken,
+          setCurrentUser,
           filterRequests,
           updateRequestStatus,
           setRequests,
           updateTitle,
           updateDeclarations,
+          logout,
         }}
       >
         {children}
